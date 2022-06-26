@@ -1,9 +1,8 @@
-import { moveUp, moveDown, moveLeft, moveRight, mousePosition, drawCircle, drawSquare, drawRectangle } from './src/robotOperations';
+import { moveUp, moveDown, moveLeft, moveRight, mousePosition, drawCircle, drawSquare, drawRectangle, getScreenShot } from './src/robotOperations';
 import { operations } from './src/types';
 
-export const controller = (data: string) => {
+export const controller = async (data: string) => {
   const [command, firstArg, secondArg] = data.split(' ').filter((current: string) => current !== 'px');
-  console.log(command, firstArg, secondArg);
   switch (command) {
     case operations.mouse_up:
       moveUp(firstArg);
@@ -30,6 +29,7 @@ export const controller = (data: string) => {
       drawSquare(firstArg);
       return `${operations.draw_square}`;
     case operations.prnt_scrn:
-      return `${operations.prnt_scrn}`;
+      const screen = await getScreenShot();
+      return `${operations.prnt_scrn} ${screen}`;
   }
 }

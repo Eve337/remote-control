@@ -5,7 +5,6 @@ import { CustomWriteStream } from "./write";
 
 
 export const connectHandler = (ws: WebSocket) => {
-  console.log('here')
   const readStream = new stream.Readable({
     read(){}
   });

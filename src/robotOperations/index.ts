@@ -1,5 +1,5 @@
 import Jimp from 'jimp';
-import robot from 'robotjs';
+import robot, { screen } from 'robotjs';
 
 export const moveUp = (inputY: string) => {
   const { x, y } = robot.getMousePos();
@@ -77,4 +77,22 @@ export const drawRectangle = (height: string, width: string) => {
   robot.moveMouseSmooth(x, y);
 
   robot.mouseToggle('up');
+}
+
+export const getScreenShot = async () => {
+  const { x, y } = robot.getMousePos();
+  const img = screen.capture(x, y, 200, 200);
+  let readyImg;
+
+  return new Promise ((res, rej) => {
+    const image = new Jimp({ data: img.image, height: 200, width: 200 });
+
+    image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
+      
+      res(buffer.toString('base64'));
+    });
+  });
+
+  
+  if (readyImg) return readyImg;
 }
