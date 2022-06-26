@@ -13,10 +13,15 @@ export const connectHandler = (ws: WebSocket) => {
 
 
   ws.on('message', (data) => {
+    console.log(`Command: ${data}`);
     readStream.push(data);
   });
 
   pipeline(readStream, transformOp, writeStream, (err) => {
     if (err) console.log(err);
+  });
+
+  ws.on('close', () => {
+    console.log('conntection was closed');
   });
 }
