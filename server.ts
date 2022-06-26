@@ -1,6 +1,4 @@
-import Jimp from 'jimp';
 import {httpServer} from './src/http_server/index';
-import robot from 'robotjs';
 import { WebSocketServer } from 'ws';
 import { connectHandler } from './socket';
 

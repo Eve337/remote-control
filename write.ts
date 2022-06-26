@@ -13,7 +13,6 @@ export class CustomWriteStream extends Writable implements IWriteStream  {
   websocket: WebSocket;
 
   _write(chunk: { toString: () => any; }, encoding: any, callback: () => void) {
-    console.log(chunk.toString());
     this.websocket.send(chunk.toString());
     callback();
   }
